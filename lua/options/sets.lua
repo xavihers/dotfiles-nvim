@@ -22,3 +22,19 @@ vim.g.tokyonight_style = "night"
 vim.g.tokyonight_italic_functions = true
 vim.g.tokyonight_transparent = true
 vim.g.tokyonight_transparent_sidebar = true
+
+--onedarkpro
+--vim.cmd("colorscheme onedarkpro")
+
+--nightfox
+vim.cmd("colorscheme nightfox")
+
+-- Disable provider Nodejs
+-- let g:loaded_node_provider = 0`
+
+-- Python provider
+-- let g:python3_host_prog = "/usr/bin/python3"
+
+--vim.g.user_emmet_mode='a'
+
+vim.opt.timeoutlen = 1000

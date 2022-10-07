@@ -5,13 +5,14 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
   	-- Packer can manage itself
-  	use ('wbthomason/packer.nvim')
+  	use ('wbthomason/packer.nvim') --Admin pack
 
-
-	use('neovim/nvim-lspconfig')
+        use('neovim/nvim-lspconfig') --LSP
 	
+	-- Use Neovim as a language server to inject LSP diagnostics, 
+	-- code actions, and more via Lua
 	use('jose-elias-alvarez/null-ls.nvim')
-	use('MunifTanjim/prettier.nvim')
+	-- use('MunifTanjim/prettier.nvim')
         
 	use {
   		'kyazdani42/nvim-tree.lua',
@@ -19,42 +20,58 @@ return require('packer').startup(function(use)
     			'kyazdani42/nvim-web-devicons', -- optional, for file icons
   		},
   		tag = 'nightly' -- optional, updated every week. (see issue #1193)
+	} -- Files tree
+
+	use { 'kyazdani42/nvim-web-devicons' } -- Files icons
+	use { 'nvim-lua/plenary.nvim' }
+
+	-- Finding files, buffers and text
+	use {
+  		'nvim-telescope/telescope.nvim', tag = '0.1.0', 
+		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
-	use { 'kyazdani42/nvim-web-devicons' }
-use { 'nvim-lua/plenary.nvim' }
+	-- Statusline
+	use {
+  		'nvim-lualine/lualine.nvim',
+  		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
 
-use {
-  'nvim-telescope/telescope.nvim', tag = '0.1.0',
--- or                            , branch = '0.1.x',
-  requires = { {'nvim-lua/plenary.nvim'} }
-}
+	--Auto complete
+	use "hrsh7th/nvim-cmp"
 
-use {
-  'nvim-lualine/lualine.nvim',
-  requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-}
+	-- Move between buffers
+	use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
 
-use {
-        "hrsh7th/nvim-cmp",
-        requires = {
-            "hrsh7th/cmp-buffer", "hrsh7th/cmp-nvim-lsp",
-            'quangnguyen30192/cmp-nvim-ultisnips', 'hrsh7th/cmp-nvim-lua',
-            'octaltree/cmp-look', 'hrsh7th/cmp-path', 'hrsh7th/cmp-calc',
-            'f3fora/cmp-spell', 'hrsh7th/cmp-emoji'
-        }
-    }
+	-- Help to move between tabs of bufferline
+	use 'tiagovla/scope.nvim'
 
-use 'folke/tokyonight.nvim'
+	-- colorizer html
+	use 'norcalli/nvim-colorizer.lua'
 
--- use({ 'seblj/nvim-tabline', requires = { 'kyazdani42/nvim-web-devicons' } })
+	-- toggleterm
+	use { "akinsho/toggleterm.nvim", tag = '*' }
 
-use {'akinsho/bufferline.nvim', tag = "v2.*", requires = 'kyazdani42/nvim-web-devicons'}
+	-- Theme
 
--- Help to move bettewn tabs of bufferline
-use 'tiagovla/scope.nvim'
+	-- onedarkpro
+	-- use 'olimorris/onedarkpro.nvim'
 
--- colorizer tag
-use 'norcalli/nvim-colorizer.lua'
+	-- nightfox
+	use 'EdenEast/nightfox.nvim'
+
+	-- End of Theme
+	
+	--lspkind
+	use { 'onsails/lspkind-nvim' }
+
+	-- nvim-treesitter
+	use {    
+    		'nvim-treesitter/nvim-treesitter',
+    		run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+	}
+
+	use 'L3MON4D3/LuaSnip'
+	use 'windwp/nvim-ts-autotag' --Depending of treesitter
 
 end)

@@ -1,16 +1,17 @@
-local null_ls = require("null-ls")
+local null_ls_status, null_ls = pcall(require, "null-ls")
+if not null_ls_status then
+ return
+end
+
+
+local formatting = null_ls.builtins.formatting
+local diagnostics = null_ls.builtins.diagnostics
 
 null_ls.setup({
-  on_attach = function(client, bufnr)
-    if client.server_capabilities.documentFormattingProvider then
-      vim.cmd("nnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.formatting()<CR>")
-
-      -- format on save
-      vim.cmd("autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()")
-    end
-
-    if client.server_capabilities.documentRangeFormattingProvider then
-      vim.cmd("xnoremap <silent><buffer> <Leader>f :lua vim.lsp.buf.range_formatting({})<CR>")
-    end
-  end,
+	debug = false,	
+    sources = {
+	    formatting.prettier.with({ extra_args = { "--no-semi", "--single-quote", "--jsx-single-quote" }}),
+	    formatting.stylua,
+    }
 })
+
