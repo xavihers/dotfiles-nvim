@@ -6,7 +6,7 @@ require'nvim-tree'.setup {
   open_on_setup       = false,
   ignore_ft_on_setup  = {},
   open_on_tab         = true,
-  update_cwd          = false,
+  update_cwd          = true,
   diagnostics = {
     enable = false,
     icons = {
@@ -62,6 +62,6 @@ require'nvim-tree'.setup {
   trash = {
     cmd = "trash",
     require_confirm = true
-  }
+  },
 }
 

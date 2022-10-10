@@ -31,6 +31,8 @@ return require('packer').startup(function(use)
 		requires = { {'nvim-lua/plenary.nvim'} }
 	}
 
+	use { 'nvim-telescope/telescope-file-browser.nvim' }
+
 	-- Statusline
 	use {
   		'nvim-lualine/lualine.nvim',
